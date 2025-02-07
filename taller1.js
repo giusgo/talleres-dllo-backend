@@ -39,7 +39,7 @@ function bogo(arr) {
         arr = shuffle(arr);
     } while (!sorted(arr));
 
-    return shuffleCount + ' | ' + arr.join();
+    return arr;
 }
 
 function peorParidad(number) {
@@ -51,4 +51,4 @@ function peorParidad(number) {
     return even;
 }
 
-console.log(peorParidad(20));
+console.log(peorParidad(21));
