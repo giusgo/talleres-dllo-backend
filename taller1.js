@@ -12,10 +12,10 @@ function mejorParidad(number) {
 }
 
 function bogo(arr) {
-    var shuffleCount = 0;
+    let shuffleCount = 0;
     function shuffle(arr) {
-        var shuffled = [];
-        var rand;
+        let shuffled = [];
+        let rand;
         while (arr.length !== 0) {
             rand = Math.floor(Math.random() * arr.length);
             shuffled.push(arr.splice(rand, 1)[0]);
@@ -24,7 +24,7 @@ function bogo(arr) {
     }
 
     function sorted(shuffle) {
-        for (var i = 0; i < shuffle.length - 1; i++) {
+        for (let i = 0; i < shuffle.length - 1; i++) {
             if (shuffle[i] <= shuffle[i + 1]) {
                 continue;
             } else {
@@ -51,4 +51,4 @@ function peorParidad(number) {
     return even;
 }
 
-console.log(peorParidad(21));
+console.log(peorParidad(20));
