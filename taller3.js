@@ -14,10 +14,6 @@ function desglosarString(string, type) {
 }
 
 function twoSum(list, num) {
-    // Suponiendo que lo de "No se permite utilizar el mismo numero 2 veces"
-    // se refiera a que el arreglo no puede contener el mismo numero mas de 1 vez...
-    // sino es asi, deme chance :P
-
     for (let i = 0; i < list.length; i++) {
         const current = list[i];
         const complement = num - current;
@@ -68,6 +64,7 @@ console.log(desglosarString("murcielagos", "vocales"));
 console.log(desglosarString("murcielagos", "consonantes"));
 console.log(twoSum([2, 7, 11, 15], 13));
 console.log(twoSum([3, 4, 2], 6));
+console.log(twoSum([3, 3, 2], 6));
 console.log(conversionRomana("III"));
 console.log(conversionRomana("XIV"));
 console.log(conversionRomana("MMXXIV"));
