@@ -11,11 +11,17 @@ const port = 3000;
 app.use(bodyParser.json());
 
 
-app.get("/users/hobby", (request, response) => {
-    const { hobby } = request.query;
+app.get("/users/hobby/:hobby", (request, response) => {
+    const { hobby } = request.params;
+
+    const error_details = [];
 
     if (!hobby) {
-        return response.status(400).json({ error: "Se requiere un hobby." });
+        error_details.push("Se requiere un hobby.");
+    }
+
+    if (error_details.length > 0) {
+        return response.status(400).json({ details: error_details });
     }
 
     const users = data.filter((user) => user.hobbies.includes(hobby));
@@ -24,14 +30,20 @@ app.get("/users/hobby", (request, response) => {
 });
 
 
-app.get("/users/exists", (request, response) => {
-    const { codigo } = request.query;
+app.get("/users/exists/:code", (request, response) => {
+    const { code } = request.params;
 
-    if (!codigo) {
-        return response.status(400).json({ error: "Se requiere un codigo." });
+    const error_details = [];
+
+    if (!code) {
+        error_details.push("Se requiere un codigo.");
     }
 
-    const user = data.find((user) => user.codigo === codigo);
+    if (error_details.length > 0) {
+        return response.status(400).json({ details: error_details });
+    }
+
+    const user = data.find((user) => user.codigo === code);
 
     if (user) {
         return response.json({ existe: true });
@@ -41,11 +53,17 @@ app.get("/users/exists", (request, response) => {
 });
 
 
-app.get("/users/hobby/count", (request, response) => {
-    const { hobby } = request.query;
+app.get("/users/hobby/:hobby/count", (request, response) => {
+    const { hobby } = request.params;
+
+    const error_details = [];
 
     if (!hobby) {
-        return response.status(400).json({ error: "Se requiere un hobby." });
+        error_details.push("Se requiere un hobby.");
+    }
+
+    if (error_details.length > 0) {
+        return response.status(400).json({ details: error_details });
     }
 
     const users = data.filter((user) => user.hobbies.includes(hobby));
@@ -64,12 +82,18 @@ app.get("/users/is-free", (request, response) => {
 app.post("/users/suggest", (request, response) => {
     const { hobby, codigo } = request.body;
 
+    const error_details = [];
+
     if (!hobby) {
-        return response.status(400).json({ error: "Se requiere un hobby." });
+        error_details.push("Se requiere un hobby.");
     }
 
     if (!codigo) {
-        return response.status(400).json({ error: "Se requiere un codigo." });
+        error_details.push("Se requiere un codigo.");
+    }
+
+    if (error_details.length > 0) {
+        return response.status(400).json({ details: error_details });
     }
 
     const user = data.find((user) => user.codigo === codigo);
@@ -91,24 +115,34 @@ app.post("/users/suggest", (request, response) => {
 app.post("/users", (request, response) => {
     const { codigo, nombre, apellido, hobbies } = request.body;
 
+    const error_details = [];
+
     if (!codigo) {
-        return response.status(400).json({ error: "Se requiere un codigo." });
+        error_details.push("Se requiere un código.");
     }
-
+    
     if (!nombre) {
-        return response.status(400).json({ error: "Se requiere un nombre." });
+        error_details.push("Se requiere un nombre.");
     }
-
+    
     if (!apellido) {
-        return response.status(400).json({ error: "Se requiere un apellido." });
+        error_details.push("Se requiere un apellido.");
     }
-
+    
     if (!hobbies) {
-        return response.status(400).json({ error: "Se requiere hobbies." });
+        error_details.push("Se requieren hobbies.");
+    } else if (hobbies.length < 2) {
+        error_details.push("Se requiere al menos 2 hobbies.");
     }
 
-    if (hobbies.length < 2) {
-        return response.status(400).json({ error: "Se requiere al menos 2 hobbies." });
+    if (error_details.length > 0) {
+        return response.status(400).json({ details: error_details });
+    }
+
+    const user = data.find((user) => user.codigo === codigo);
+
+    if (user) {
+        return response.status(400).json({ error: "Ya existe un usuario con ese codigo." });
     }
 
     data.push({ codigo, nombre, apellido, hobbies });
