@@ -18,7 +18,7 @@ app.use(SERVER_VERSION + "users", userRoutes);
 
 function routeNotFound(request: Request, response: Response) {
   response.status(404).json({
-    message: "Ruta no encontrada",
+    message: "Route not found",
   });
 }
 
