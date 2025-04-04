@@ -7,13 +7,13 @@ function createUserAction(
   hobbies: string[]
 ): void {
   if (hobbies.length < 2) {
-    throw new Error("Se requiere al menos 2 hobbies.");
+    throw new Error("At least 2 hobbies are required.");
   }
 
   const user = UsersData.find((user) => user.codigo === code);
 
   if (user) {
-    throw new Error("Ya existe un usuario con ese codigo.");
+    throw new Error("A user with that code already exists.");
   }
 
   UsersData.push({ codigo: code, nombre: name, apellido: last_name, hobbies });
