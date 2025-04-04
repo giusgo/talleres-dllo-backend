@@ -2,6 +2,9 @@ import { Request, Response } from "express";
 import cors from "cors";
 import express from "express";
 
+// API ROUTES IMPORTS
+import userRoutes from "./user/v1/user.routes";
+
 // MIDDLEWARES
 const app = express();
 
@@ -10,6 +13,8 @@ app.use(express.json());
 
 // ROUTES
 const SERVER_VERSION = "/api/v1/";
+
+app.use(SERVER_VERSION + "users", userRoutes);
 
 function routeNotFound(request: Request, response: Response) {
   response.status(404).json({

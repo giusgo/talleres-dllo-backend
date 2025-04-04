@@ -8,6 +8,6 @@ type UserType = {
   hobbies: string[];
 };
 
-const UsersData: UserType[] = data;
+const UsersData: UserType[] = Array.from(data);
 
 export { UserType, UsersData };
