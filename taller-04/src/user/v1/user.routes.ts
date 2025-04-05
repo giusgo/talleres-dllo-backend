@@ -108,7 +108,7 @@ userRoutes.get("/hobby/:hobby", GetByHobby);
 userRoutes.get("/exists/:code", UserExists);
 userRoutes.get("/hobby/:hobby/count", CountByHobby);
 userRoutes.get("/is-free", GetFreeUsers);
-userRoutes.post("/suggest", SuggestHobby);
+userRoutes.put("/suggest", SuggestHobby);
 userRoutes.post("/", CreateUser);
 
 // EXPORT ROUTES
